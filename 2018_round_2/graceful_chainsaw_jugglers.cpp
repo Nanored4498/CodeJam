@@ -9,11 +9,11 @@ int f(int i, int r, int b) {
 	res = 0;
 	if(i == 501) return 0;
 	int j = 0;
-	while(i <= 500 && r >= 0 && b >= 0) {
+	while(r >= 0 && b >= 0) {
 		res = max(res, f(i+1, r, b) + j);
 		r -= i;
 		b -= j;
-		j ++;
+		++ j;
 	}
 	return res;
 }
