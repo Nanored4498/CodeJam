@@ -30,16 +30,12 @@ vector<int> pos[MAX_N];
 
 ll f(int a, int b, int v) {
 	if(a == b) return 1;
-	int r = 0, l = pos[v].size()-1;
-	if(l == -1) return 0;
-	while(r < l) {
-		int c = (r+l+1)/2;
-		if(pos[v][c] >= b) l = c-1;
-		else r = c;
-	}
-	int p = pos[v][r];
-	if(p >= b || p < a) return 0;
-	ll x = f(a, p, v), y = f(p+1, b, v+1);
+	if(pos[v].empty()) return 0;
+	int p = pos[v].back();
+	pos[v].pop_back();
+	if(p < a || b <= p) return 0;
+	ll y = f(p+1, b, v+1);
+	ll x = f(a, p, v);
 	int k = p-a;
 	int n = b-a-1;
 	return (comb(k, n) * ((x * y) % MOD)) % MOD;
